@@ -1,6 +1,23 @@
 <!doctype html>
 <html lang="en">
+<head>
 <meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5S8W6KMB');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N48PR9J9NV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N48PR9J9NV');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Freedom Ledger</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,6 +165,12 @@ th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercas
   .lede { max-width: none; }
 }
 </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S8W6KMB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="wrap">
   <header>
@@ -514,7 +537,8 @@ th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercas
     const to = $("emailTo").value.trim();
     if (to && !$("emailTo").checkValidity()) { say("That email address doesn't look right. Check it, or leave it blank and pick the recipient in your email app."); return; }
     const href = "mailto:" + encodeURIComponent(to) + "?subject=" + encodeURIComponent("My Freedom Ledger results") + "&body=" + encodeURIComponent(summary());
-    const a = document.createElement("a"); a.href = href; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+    // Open the mail app by navigation, not a link click, so analytics click listeners never see this URL (it holds the user's numbers).
+    window.location.href = href;
     say("Your email app should open with a draft. Nothing is sent until you press Send there. If no app opened, use Copy summary and paste it into an email.");
   });
   $("copyBtn").addEventListener("click", () => {
@@ -535,3 +559,5 @@ th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercas
   update();
 })();
 </script>
+</body>
+</html>
