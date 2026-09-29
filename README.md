@@ -9,4 +9,4 @@ A single-file personal wealth planner. Open `wealth/index.html` in a browser (no
 - Get a prioritized next-step checklist and an avalanche debt-payoff order.
 - Print the page with your inputs, or email yourself a plain-text summary (opens your own email app via `mailto:`), or copy it.
 
-No information is collected: there is no server, analytics or tracking, and data stays in your browser's localStorage. Educational projection, not financial advice.
+The numbers you enter are never collected: there is no server-side storage, and data stays in your browser's localStorage. See `wealth/privacy.html` for the site Privacy Policy. Educational projection, not financial advice.
