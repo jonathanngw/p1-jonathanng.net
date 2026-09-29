@@ -7,5 +7,6 @@ A single-file personal wealth planner. Open `wealth/index.html` in a browser (no
 - See when you reach financial independence (FI number = annual core spending ÷ withdrawal rate).
 - Drag the "earn more / spend less" levers to see how many years each saves.
 - Get a prioritized next-step checklist and an avalanche debt-payoff order.
+- Print the page with your inputs, or email yourself a plain-text summary (opens your own email app via `mailto:`), or copy it.
 
-Data stays in your browser's localStorage. Educational projection, not financial advice.
+No information is collected: there is no server, analytics or tracking, and data stays in your browser's localStorage. Educational projection, not financial advice.
