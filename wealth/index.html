@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Freedom Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a two-column ledger — inputs on the left rail, projection + plan on the right; stacks to one column on phones. */
+:root {
+  --paper: #eef2ef;
+  --sheet: #f8faf8;
+  --ink: #16241e;
+  --muted: #5a6b63;
+  --rule: #cfd9d3;
+  --note: #1f6b4f;         /* banknote green accent */
+  --note-soft: #d6e7de;
+  --brass: #9a6b1f;        /* what-if line */
+  --good: #1f7a45;
+  --warn: #a86a00;
+  --bad: #b3372b;
+  --display: "Young Serif", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1714; --sheet: #16211c; --ink: #e3ece7; --muted: #95a89e; --rule: #2b3a33;
+    --note: #5fc497; --note-soft: #1d3a2d; --brass: #e0ac55;
+    --good: #5fc497; --warn: #e0ac55; --bad: #f07a6c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1714; --sheet: #16211c; --ink: #e3ece7; --muted: #95a89e; --rule: #2b3a33;
+  --note: #5fc497; --note-soft: #1d3a2d; --brass: #e0ac55;
+  --good: #5fc497; --warn: #e0ac55; --bad: #f07a6c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); margin: 0; padding-inline: 16px; padding-block: 24px 48px; }
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 24px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--note); }
+h1 { font: 400 clamp(30px, 5vw, 44px)/1.1 var(--display); margin: 0; text-wrap: balance; }
+h2 { font: 400 22px/1.2 var(--display); margin: 0; text-wrap: balance; }
+h3 { font: 600 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.lede { color: var(--muted); max-width: 64ch; margin: 0; }
+.grid { display: grid; grid-template-columns: minmax(0, 390px) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 820px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
+.stack { display: grid; gap: 24px; min-width: 0; }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 10px; }
+legend { padding: 0; margin-bottom: 10px; }
+.field { display: grid; grid-template-columns: 1fr 120px; align-items: center; gap: 10px; }
+.field label { font-size: 14px; }
+.field small { display: block; color: var(--muted); font-size: 12px; }
+input[type=number], input[type=text] {
+  width: 100%; font: 14px var(--mono); padding: 7px 8px; border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--paper); color: var(--ink); text-align: right; font-variant-numeric: tabular-nums;
+}
+input[type=text] { text-align: left; font-family: var(--body); }
+input:focus-visible, button:focus-visible, input[type=range]:focus-visible { outline: 2px solid var(--note); outline-offset: 2px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.check input { margin-top: 3px; accent-color: var(--note); }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+.debt { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, .8fr) minmax(0, .9fr) 24px; gap: 6px; align-items: center; }
+.debt input { padding: 6px 5px; font-size: 12px; }
+.debt-head { font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+button { font: 500 13px var(--body); cursor: pointer; border-radius: 4px; }
+.btn { border: 1px solid var(--note); background: transparent; color: var(--note); padding: 7px 12px; justify-self: start; }
+.btn:hover { background: var(--note-soft); }
+.x { border: 0; background: transparent; color: var(--muted); font-size: 18px; line-height: 1; padding: 4px; }
+.x:hover { color: var(--bad); }
+.sample { font-size: 12px; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.sample button { border: 0; background: none; color: var(--note); text-decoration: underline; padding: 0; font-size: 12px; }
+
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+@media (max-width: 560px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.kpi { background: var(--sheet); padding: 16px; display: grid; gap: 6px; align-content: start; }
+.kpi .v { font: 400 26px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.kpi .s { font-size: 12px; color: var(--muted); }
+.hero-kpi .v { color: var(--note); }
+
+.chart-wrap { width: 100%; overflow-x: auto; }
+svg text { fill: var(--muted); font: 11px var(--mono); }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 14px; height: 3px; margin-right: 6px; vertical-align: middle; background: var(--c); }
+
+.levers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
+@media (max-width: 560px) { .levers { grid-template-columns: minmax(0, 1fr); } }
+.lever { display: grid; gap: 6px; }
+.lever label { display: flex; justify-content: space-between; font-size: 14px; }
+.lever output { font: 500 14px var(--mono); color: var(--brass); }
+input[type=range] { width: 100%; accent-color: var(--brass); }
+.verdict { background: var(--note-soft); border-radius: 4px; padding: 12px 14px; font-size: 14px; }
+.verdict b { font-variant-numeric: tabular-nums; }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.steps li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 12px; padding: 12px 0; border-top: 1px solid var(--rule); align-items: start; }
+.steps li:first-child { border-top: 0; }
+.steps .n { font: 500 13px/1.6 var(--mono); color: var(--muted); }
+.steps .t { font-weight: 600; }
+.steps .d { color: var(--muted); font-size: 13px; }
+.pill { font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 8px; border-radius: 99px; border: 1px solid currentColor; white-space: nowrap; }
+.pill.done { color: var(--good); }
+.pill.now { color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.pill.later { color: var(--muted); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 8px 6px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+.fine { font-size: 12px; color: var(--muted); max-width: 72ch; }
+@media (prefers-reduced-motion: no-preference) { .line { transition: d .3s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Freedom Ledger</span>
+    <h1>Your road to financial independence</h1>
+    <p class="lede">Nobody gets rich from an app. People get rich by keeping a wide gap between what they earn and what they spend, clearing expensive debt, and letting invested money compound for years. This ledger shows exactly how far away that is for you, and which lever moves it most.</p>
+  </header>
+
+  <div class="grid">
+    <form class="panel" id="inputs" autocomplete="off">
+      <div class="sample" id="sampleNote">Showing example numbers. Replace them with yours; they stay in this browser only. <button type="button" id="reset">Reset to example</button></div>
+
+      <fieldset>
+        <legend><h3>Monthly cash flow</h3></legend>
+        <div class="field"><label for="income">Take-home income<small>after tax, per month</small></label><input type="number" id="income" min="0" step="50"></div>
+        <div class="field"><label for="expenses">Spending<small>everything, incl. debt minimums</small></label><input type="number" id="expenses" min="0" step="50"></div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <legend><h3>What you have</h3></legend>
+        <div class="field"><label for="cash">Cash savings</label><input type="number" id="cash" min="0" step="100"></div>
+        <div class="field"><label for="invested">Invested<small>retirement + brokerage</small></label><input type="number" id="invested" min="0" step="100"></div>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <legend><h3>What you owe</h3></legend>
+        <div class="debt debt-head"><span>Debt</span><span>Balance</span><span>APR %</span><span>Min/mo</span><span></span></div>
+        <div id="debts" style="display:grid;gap:6px"></div>
+        <button type="button" class="btn" id="addDebt">Add a debt</button>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <legend><h3>Assumptions</h3></legend>
+        <div class="field"><label for="ret">Real return<small>after inflation, % per year</small></label><input type="number" id="ret" min="0" max="15" step="0.5"></div>
+        <div class="field"><label for="swr">Withdrawal rate<small>% of portfolio per year</small></label><input type="number" id="swr" min="2" max="6" step="0.25"></div>
+        <div class="field"><label for="efMonths">Emergency fund<small>months of core spending</small></label><input type="number" id="efMonths" min="0" max="12" step="1"></div>
+        <label class="check"><input type="checkbox" id="match"> I contribute enough to get my full employer 401(k) match</label>
+        <label class="check"><input type="checkbox" id="index"> My investments are in low-cost index funds</label>
+      </fieldset>
+    </form>
+
+    <div class="stack">
+      <section class="kpis" aria-label="Summary">
+        <div class="kpi hero-kpi"><h3>Free in</h3><div class="v" id="kFree">—</div><div class="s" id="kFreeS"></div></div>
+        <div class="kpi"><h3>Savings rate</h3><div class="v" id="kRate">—</div><div class="s" id="kRateS"></div></div>
+        <div class="kpi"><h3>Net worth</h3><div class="v" id="kNW">—</div><div class="s" id="kNWS"></div></div>
+        <div class="kpi"><h3>FI number</h3><div class="v" id="kFI">—</div><div class="s" id="kFIS"></div></div>
+      </section>
+
+      <section class="panel">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+          <h2>Net worth, in today's dollars</h2>
+          <div class="legend"><span style="--c:var(--note)">Current plan</span><span style="--c:var(--brass)">With the changes below</span><span style="--c:var(--muted)">FI number</span></div>
+        </div>
+        <div class="chart-wrap"><svg id="chart" viewBox="0 0 720 300" width="100%" role="img" aria-label="Projected net worth over time"></svg></div>
+
+        <h3>Pull a lever</h3>
+        <div class="levers">
+          <div class="lever"><label for="lvIncome">Earn more per month <output id="oIncome"></output></label><input type="range" id="lvIncome" min="0" max="3000" step="100" value="500"></div>
+          <div class="lever"><label for="lvCut">Spend less per month <output id="oCut"></output></label><input type="range" id="lvCut" min="0" max="2000" step="50" value="300"></div>
+        </div>
+        <div class="verdict" id="verdict"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Your next move</h2>
+        <ol class="steps" id="steps"></ol>
+      </section>
+
+      <section class="panel">
+        <h2>Debt payoff order</h2>
+        <p class="fine" style="margin:0">Avalanche method: pay minimums on everything, then throw every spare dollar at the highest APR above your expected return. Debts cheaper than that return just get their minimums.</p>
+        <div class="table-wrap"><table id="debtTable"></table></div>
+      </section>
+
+      <p class="fine">Educational projection, not financial advice. Returns are not guaranteed and real markets fall as well as rise. The model works monthly in inflation-adjusted dollars: surplus fills your emergency fund first, then pays expensive debt, then goes into investments.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const EXAMPLE = {
+    income: 6200, expenses: 4600, cash: 3500, invested: 22000,
+    ret: 5, swr: 4, efMonths: 4, match: false, index: true,
+    debts: [
+      { name: "Credit card", balance: 4800, apr: 23.9, min: 140 },
+      { name: "Car loan", balance: 11500, apr: 6.4, min: 310 },
+      { name: "Student loan", balance: 18000, apr: 4.5, min: 210 },
+    ],
+  };
+  const KEY = "freedom-ledger-v1";
+  const $ = id => document.getElementById(id);
+  const fmt = n => (n < 0 ? "−$" : "$") + Math.round(Math.abs(n)).toLocaleString("en-US");
+  const short = n => {
+    const a = Math.abs(n), s = n < 0 ? "−$" : "$";
+    if (a >= 1e6) return s + (a / 1e6).toFixed(a >= 1e7 ? 0 : 1) + "M";
+    if (a >= 1e3) return s + Math.round(a / 1e3) + "k";
+    return s + Math.round(a);
+  };
+  const yrs = m => m == null ? "40+ yrs" : m < 12 ? m + " mo" : (m / 12).toFixed(1).replace(/\.0$/, "") + " yrs";
+
+  let state;
+  try { state = JSON.parse(localStorage.getItem(KEY)); } catch (e) { state = null; }
+  let isExample = !state;
+  if (!state) state = structuredClone(EXAMPLE);
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+  const numFields = ["income", "expenses", "cash", "invested", "ret", "swr", "efMonths"];
+  function fillForm() {
+    numFields.forEach(k => $(k).value = state[k]);
+    $("match").checked = state.match; $("index").checked = state.index;
+    renderDebtRows();
+    $("sampleNote").hidden = !isExample;
+  }
+  function renderDebtRows() {
+    $("debts").innerHTML = state.debts.map((d, i) => `
+      <div class="debt">
+        <input type="text" id="dn${i}" data-i="${i}" data-k="name" value="${d.name.replace(/"/g, "&quot;")}" aria-label="Debt name">
+        <input type="number" id="db${i}" data-i="${i}" data-k="balance" value="${d.balance}" min="0" step="100" aria-label="Balance">
+        <input type="number" id="da${i}" data-i="${i}" data-k="apr" value="${d.apr}" min="0" step="0.1" aria-label="APR">
+        <input type="number" id="dm${i}" data-i="${i}" data-k="min" value="${d.min}" min="0" step="10" aria-label="Minimum payment">
+        <button type="button" class="x" data-del="${i}" aria-label="Remove ${d.name}">×</button>
+      </div>`).join("");
+  }
+
+  $("inputs").addEventListener("input", e => {
+    const t = e.target;
+    if (t.dataset.k) {
+      const d = state.debts[+t.dataset.i];
+      d[t.dataset.k] = t.dataset.k === "name" ? t.value : (parseFloat(t.value) || 0);
+    } else if (numFields.includes(t.id)) state[t.id] = parseFloat(t.value) || 0;
+    else if (t.id === "match" || t.id === "index") state[t.id] = t.checked;
+    else return;
+    isExample = false; $("sampleNote").hidden = true;
+    save(); update();
+  });
+  $("inputs").addEventListener("submit", e => e.preventDefault());
+  $("debts").addEventListener("click", e => {
+    const i = e.target.dataset.del; if (i == null) return;
+    state.debts.splice(+i, 1); isExample = false; save(); renderDebtRows(); update();
+  });
+  $("addDebt").addEventListener("click", () => {
+    state.debts.push({ name: "New debt", balance: 1000, apr: 10, min: 50 });
+    isExample = false; save(); renderDebtRows(); update();
+    $("dn" + (state.debts.length - 1)).focus();
+  });
+  $("reset").addEventListener("click", () => {
+    state = structuredClone(EXAMPLE); isExample = true;
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    fillForm(); update();
+  });
+  ["lvIncome", "lvCut"].forEach(id => $(id).addEventListener("input", update));
+
+  // Month-by-month simulation in real (inflation-adjusted) dollars.
+  function simulate(s, extraIncome = 0, cut = 0, maxMonths = 480) {
+    const r = Math.pow(1 + s.ret / 100, 1 / 12) - 1;
+    const debts = s.debts.map(d => ({ ...d, paidAt: d.balance <= 0 ? 0 : null }));
+    const totalMin = debts.reduce((a, d) => a + (d.balance > 0 ? d.min : 0), 0);
+    const core = Math.max(0, s.expenses - cut - totalMin);          // spending that continues after debts
+    const fiTarget = core * 12 / (s.swr / 100);
+    const efTarget = core * s.efMonths;
+    let cash = s.cash, inv = s.invested, fiMonth = null;
+    const nw = () => cash + inv - debts.reduce((a, d) => a + d.balance, 0);
+    const series = [nw()];
+    for (let m = 1; m <= maxMonths; m++) {
+      inv *= 1 + r;
+      let pool = s.income + extraIncome - core;                     // money left after core spending
+      for (const d of debts) {                                        // interest + minimums
+        if (d.balance <= 0) continue;
+        d.balance *= 1 + d.apr / 100 / 12;
+        const pay = Math.min(d.min, d.balance);
+        d.balance -= pay; pool -= pay;
+        if (d.balance <= 0.005) { d.balance = 0; d.paidAt = m; }
+      }
+      if (pool < 0) { cash += pool; if (cash < 0) { inv += cash; cash = 0; } }
+      else {
+        const toEf = Math.min(pool, Math.max(0, efTarget - cash)); cash += toEf; pool -= toEf;
+        const hot = debts.filter(d => d.balance > 0 && d.apr > s.ret).sort((a, b) => b.apr - a.apr);
+        for (const d of hot) {
+          const pay = Math.min(pool, d.balance); d.balance -= pay; pool -= pay;
+          if (d.balance <= 0.005) { d.balance = 0; d.paidAt = m; }
+          if (pool <= 0) break;
+        }
+        inv += pool;
+      }
+      series.push(nw());
+      if (fiMonth == null && inv >= fiTarget && debts.every(d => d.balance <= 0 || d.apr <= s.ret)) fiMonth = m;
+    }
+    return { series, fiMonth, fiTarget, efTarget, core, debts };
+  }
+
+  function drawChart(base, alt) {
+    const W = 720, H = 300, L = 56, R = 24, T = 12, B = 30;
+    const endM = Math.min(480, Math.max(120, Math.ceil(((base.fiMonth ?? 480) + 60) / 12) * 12));
+    const a = base.series.slice(0, endM + 1), b = alt.series.slice(0, endM + 1);
+    const lo = Math.min(0, ...a, ...b);
+    const hi = Math.max(base.fiTarget * 1.15, ...a, ...b);
+    const step = niceStep((hi - lo) / 5);
+    const yMin = lo > -0.1 * step ? 0 : Math.floor(lo / step) * step, yMax = Math.ceil(hi / step) * step;
+    const x = m => L + (m / endM) * (W - L - R);
+    const y = v => T + (1 - (Math.max(v, yMin) - yMin) / (yMax - yMin)) * (H - T - B);
+    let g = "";
+    for (let v = yMin; v <= yMax + 1e-6; v += step) {
+      g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)" stroke-width="1"/>`;
+      g += `<text x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${short(v)}</text>`;
+    }
+    const yearStep = endM / 12 > 30 ? 10 : 5;
+    for (let yr = 0; yr * 12 <= endM; yr += yearStep)
+      g += `<text x="${x(yr * 12)}" y="${H - 8}" text-anchor="middle">${yr === 0 ? "now" : "yr " + yr}</text>`;
+    const path = s => s.map((v, m) => (m ? "L" : "M") + x(m).toFixed(1) + " " + y(v).toFixed(1)).join("");
+    g += `<path d="${path(a)} L${x(a.length - 1)} ${y(Math.max(yMin, 0))} L${x(0)} ${y(Math.max(yMin, 0))}Z" fill="var(--note-soft)" opacity=".6"/>`;
+    g += `<line x1="${L}" x2="${W - R}" y1="${y(base.fiTarget)}" y2="${y(base.fiTarget)}" stroke="var(--muted)" stroke-dasharray="4 4" stroke-width="1.2"/>`;
+    g += `<text x="${W - R}" y="${y(base.fiTarget) - 6}" text-anchor="end">FI ${short(base.fiTarget)}</text>`;
+    g += `<path class="line" d="${path(b)}" fill="none" stroke="var(--brass)" stroke-width="2"/>`;
+    g += `<path class="line" d="${path(a)}" fill="none" stroke="var(--note)" stroke-width="2.5"/>`;
+    for (const [s, c] of [[alt, "var(--brass)"], [base, "var(--note)"]])
+      if (s.fiMonth != null && s.fiMonth <= endM)
+        g += `<circle cx="${x(s.fiMonth)}" cy="${y(s.series[s.fiMonth])}" r="4.5" fill="${c}" stroke="var(--sheet)" stroke-width="2"/>`;
+    $("chart").innerHTML = g;
+  }
+  function niceStep(raw) {
+    const p = Math.pow(10, Math.floor(Math.log10(raw || 1))), f = raw / p;
+    return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p;
+  }
+
+  function update() {
+    const s = state;
+    const base = simulate(s);
+    const addI = +$("lvIncome").value, cut = +$("lvCut").value;
+    $("oIncome").textContent = "+" + fmt(addI); $("oCut").textContent = "−" + fmt(cut);
+    const alt = simulate(s, addI, cut);
+    drawChart(base, alt);
+
+    const surplus = s.income - s.expenses;
+    const rate = s.income > 0 ? surplus / s.income : 0;
+    const debtTotal = s.debts.reduce((a, d) => a + Math.max(0, d.balance), 0);
+    const nw = s.cash + s.invested - debtTotal;
+
+    $("kFree").textContent = base.fiMonth == null ? "40+ yrs" : yrs(base.fiMonth);
+    $("kFreeS").textContent = base.fiMonth == null ? "Widen the gap to get there" : "around " + (new Date().getFullYear() + Math.round(base.fiMonth / 12));
+    $("kRate").textContent = Math.round(rate * 100) + "%";
+    $("kRateS").textContent = (surplus >= 0 ? fmt(surplus) + " spare" : fmt(-surplus) + " short") + " each month";
+    $("kNW").textContent = short(nw);
+    $("kNWS").textContent = fmt(debtTotal) + " owed";
+    $("kFI").textContent = short(base.fiTarget);
+    $("kFIS").textContent = fmt(base.core * 12) + "/yr ÷ " + s.swr + "%";
+
+    const saved = base.fiMonth != null && alt.fiMonth != null ? base.fiMonth - alt.fiMonth : null;
+    $("verdict").innerHTML = alt.fiMonth == null
+      ? `Even with <b>${fmt(addI + cut)}</b> more per month, the model doesn't reach independence within 40 years. Start with the spending side: every dollar cut also lowers your FI number.`
+      : base.fiMonth == null
+        ? `These changes take you from never to free in <b>${yrs(alt.fiMonth)}</b>.`
+        : `<b>${fmt(addI + cut)}</b> more per month gets you free in <b>${yrs(alt.fiMonth)}</b> instead of ${yrs(base.fiMonth)}: <b>${yrs(saved)}</b> sooner. ` +
+          (cut > 0 && addI > 0 ? `Spending cuts count twice: they add to savings and shrink the FI number by ${short(cut * 12 / (s.swr / 100))}.` : "");
+
+    renderSteps(s, base, rate);
+    renderDebtTable(s, base);
+  }
+
+  function renderSteps(s, base, rate) {
+    const hot = s.debts.filter(d => d.balance > 0 && d.apr >= 8);
+    const hotTotal = hot.reduce((a, d) => a + d.balance, 0);
+    const starter = Math.min(base.efTarget, 1000);
+    const steps = [
+      { t: "Spend less than you earn", ok: s.income > s.expenses,
+        d: s.income > s.expenses ? `You keep ${fmt(s.income - s.expenses)} a month. That gap is the engine for everything below.` : `You're ${fmt(s.expenses - s.income)} short each month. Nothing else works until this is positive.` },
+      { t: "Starter buffer of $1,000", ok: s.cash >= starter, d: "Enough cash that a flat tire doesn't go on a credit card." },
+      { t: "Capture your full employer match", ok: s.match, d: "An instant 50–100% return. Always take it before paying down anything but card debt." },
+      { t: "Kill high-interest debt", ok: hot.length === 0,
+        d: hot.length ? `${fmt(hotTotal)} at 8%+ APR (${hot.map(d => d.name).join(", ")}). Paying it off is a guaranteed return equal to the APR.` : "Nothing above 8% APR. Good." },
+      { t: `Full emergency fund: ${s.efMonths} months`, ok: s.cash >= base.efTarget,
+        d: `Target ${fmt(base.efTarget)} in cash${s.cash < base.efTarget ? `; you have ${fmt(s.cash)}.` : "."}` },
+      { t: "Save at least 20% of take-home", ok: rate >= 0.2,
+        d: `You're at ${Math.round(rate * 100)}%. At 20% most people reach independence in about 37 years; at 50%, about 17.` },
+      { t: "Invest in low-cost index funds", ok: s.index, d: "Broad, diversified, expense ratio under 0.1%. Automate the transfer the day you get paid." },
+    ];
+    const firstOpen = steps.findIndex(x => !x.ok);
+    $("steps").innerHTML = steps.map((x, i) => {
+      const st = x.ok ? ["done", "Done"] : i === firstOpen ? ["now", "Do this now"] : ["later", "Up next"];
+      return `<li><span class="n">${String(i + 1).padStart(2, "0")}</span><div><div class="t">${x.t}</div><div class="d">${x.d}</div></div><span class="pill ${st[0]}">${st[1]}</span></li>`;
+    }).join("");
+  }
+
+  function renderDebtTable(s, base) {
+    if (!s.debts.length) { $("debtTable").innerHTML = `<tr><td>No debts entered. Everything spare goes straight to investing.</td></tr>`; return; }
+    const rows = base.debts.map((d, i) => ({ ...s.debts[i], paidAt: d.paidAt }))
+      .sort((a, b) => b.apr - a.apr);
+    $("debtTable").innerHTML = `<thead><tr><th>Debt</th><th>Balance</th><th>APR</th><th>Strategy</th><th>Paid off</th></tr></thead><tbody>` +
+      rows.map(d => `<tr><td>${d.name.replace(/</g, "&lt;")}</td><td>${fmt(d.balance)}</td><td>${d.apr}%</td>
+        <td>${d.balance <= 0 ? "—" : d.apr > s.ret ? "Attack" : "Minimums"}</td>
+        <td>${d.balance <= 0 ? "Done" : d.paidAt == null ? "Not in 40 yrs" : yrs(d.paidAt)}</td></tr>`).join("") + `</tbody>`;
+  }
+
+  fillForm();
+  update();
+})();
+</script>
