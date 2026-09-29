@@ -1,6 +1,8 @@
 # p1-jonathanng.net
 ## Freedom Ledger (`wealth/`)
 
+Deployed with Cloudflare Workers static assets: `wrangler.jsonc` serves `wealth/` at the site root.
+
 A single-file personal wealth planner. Open `wealth/index.html` in a browser (no build step).
 
 - Enter take-home income, spending, savings, investments and debts.
@@ -13,4 +15,4 @@ The numbers you enter are never collected: there is no server-side storage, and 
 
 ### Analytics and cookie consent
 
-Both pages load Google Tag Manager (`GTM-5S8W6KMB`) and GA4 (`G-N48PR9J9NV`). `wealth/consent.js` must load before them: it sets Google Consent Mode v2 to *denied* by default, shows the cookie banner (Accept all / Reject all / Customize), saves the choice in localStorage, and pushes a `cookie_consent_update` event. Any element with `data-cookie-settings` reopens the banner.
+Both pages load Google Tag Manager (`GTM-5S8W6KMB`) and GA4 (`G-N48PR9J9NV`). `wealth/consent.js` must load before them: it sets Google Consent Mode v2 to *denied* by default for EEA/UK/Swiss visitors (by IP region, via the `region` parameter) and *granted* elsewhere, shows the cookie banner to visitors in a European time zone (Accept all / Reject all / Customize), saves the choice in localStorage, and pushes a `cookie_consent_update` event. Any element with `data-cookie-settings` reopens the banner.

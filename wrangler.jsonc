@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers static-assets deploy for the Freedom Ledger site.
+  // Serves the wealth/ folder at the site root (index.html, privacy.html, consent.js).
+  "name": "p1-jonathanng-net",
+  "compatibility_date": "2026-09-26",
+  "assets": {
+    "directory": "./wealth"
+  }
+}

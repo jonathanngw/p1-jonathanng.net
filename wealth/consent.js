@@ -1,15 +1,32 @@
 /*
  * Cookie consent banner + Google Consent Mode v2.
  * Load this synchronously in <head> BEFORE the Google Tag Manager and gtag.js snippets:
- * it sets every Google storage type to "denied" by default, then re-applies the
- * visitor's saved choice (if any) and shows the banner until they choose.
- * Reopen it from any element with the attribute data-cookie-settings.
+ * analytics and ad storage default to "denied" for visitors in the EEA, UK and
+ * Switzerland (Google applies this by the visitor's IP region) and "granted"
+ * everywhere else. The banner is shown only to visitors whose time zone is in
+ * Europe, until they choose. Anyone can reopen it from an element with the
+ * attribute data-cookie-settings.
  */
 (function () {
   var KEY = "cmf-cookie-consent-v1";
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
 
+  // EU member states + EEA (IS, LI, NO) + UK + Switzerland.
+  var CONSENT_REGIONS = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU",
+    "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE",
+    "IS", "LI", "NO", "GB", "CH"];
+
+  // Everyone else: allowed by default.
+  gtag("consent", "default", {
+    ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted",
+    analytics_storage: "granted",
+    functionality_storage: "granted",
+    security_storage: "granted"
+  });
+  // EU/UK: blocked until the visitor opts in. The region-specific default wins for those visitors.
   gtag("consent", "default", {
     ad_storage: "denied",
     ad_user_data: "denied",
@@ -17,8 +34,16 @@
     analytics_storage: "denied",
     functionality_storage: "granted",
     security_storage: "granted",
+    region: CONSENT_REGIONS,
     wait_for_update: 500
   });
+
+  // Decide whether to show the banner without any network lookup: a European time zone.
+  var inEurope = false;
+  try {
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    inEurope = /^Europe\//.test(tz) || /^Atlantic\/(Canary|Madeira|Azores|Reykjavik|Faroe)$/.test(tz);
+  } catch (e) {}
   gtag("set", "ads_data_redaction", true);
 
   function read() {
@@ -60,7 +85,7 @@
   var el;
   function show() {
     if (el) { el.hidden = false; return; }
-    var cur = read() || { analytics: false, ads: false };
+    var cur = read() || { analytics: !inEurope, ads: !inEurope };
     var style = document.createElement("style");
     style.textContent = CSS;
     document.head.appendChild(style);
@@ -103,7 +128,7 @@
   }
 
   function init() {
-    if (!saved) show();
+    if (!saved && inEurope) show();
     document.addEventListener("click", function (e) {
       var t = e.target.closest && e.target.closest("[data-cookie-settings]");
       if (!t) return;
