@@ -1,14 +1,16 @@
 <!doctype html>
 <html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Freedom Ledger</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-
-
-#Google Tag Manager Begin
+<!-- Cookie consent: must load before Google Tag Manager / gtag.js -->
+<script src="consent.js"></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5S8W6KMB');</script>
+<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N48PR9J9NV"></script>
 <script>
@@ -18,8 +20,11 @@
 
   gtag('config', 'G-N48PR9J9NV');
 </script>
-#Google Tag Manager End
-  
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Freedom Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a two-column ledger — inputs on the left rail, projection + plan on the right; stacks to one column on phones. */
 :root {
@@ -127,14 +132,76 @@ th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercas
 .table-wrap { overflow-x: auto; }
 .fine { font-size: 12px; color: var(--muted); max-width: 72ch; }
 @media (prefers-reduced-motion: no-preference) { .line { transition: d .3s; } }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; }
+.btn-solid { border: 1px solid var(--note); background: var(--note); color: var(--sheet); padding: 8px 14px; }
+.btn-solid:hover { filter: brightness(1.08); }
+.email { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; flex: 1 1 340px; min-width: 0; }
+.email input { flex: 1 1 180px; padding: 8px; min-width: 0; text-align: left; font-family: var(--body); }
+.status { font-size: 12px; color: var(--muted); flex-basis: 100%; margin: 0; }
+.status:empty { display: none; }
+.privacy { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; border: 1px solid var(--note); background: var(--note-soft); border-radius: 6px; padding: 14px 16px; font-size: 13px; }
+.privacy svg { width: 20px; height: 20px; margin-top: 1px; }
+.privacy p { margin: 0; }
+.privacy p + p { margin-top: 4px; color: var(--muted); }
+.disclaimer { border-top: 1px solid var(--rule); padding-top: 16px; display: grid; gap: 8px; }
+.disclaimer p { margin: 0; }
+.print-only { display: none; }
+
+@media print {
+  :root, :root[data-theme="dark"] {
+    --paper: #fff; --sheet: #fff; --ink: #111; --muted: #444; --rule: #bbb;
+    --note: #1f6b4f; --note-soft: #eef4f0; --brass: #9a6b1f; --good: #1f7a45; --warn: #8a5600; --bad: #b3372b; color-scheme: light;
+  }
+  @page { margin: 14mm; }
+  body { padding: 0; font-size: 12px; }
+  .wrap { max-width: none; gap: 14px; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .no-print, .x, #addDebt, #sampleNote { display: none !important; }
+  .print-only { display: block; }
+  .kpis, .privacy, .disclaimer, .steps li, tr, .chart-wrap { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .panel { padding: 12px; }
+  input { border-color: transparent !important; background: transparent !important; }
+  input[type=range] { display: none; }
+  .lede { max-width: none; }
+}
 </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5S8W6KMB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="wrap">
   <header>
     <span class="eyebrow">Freedom Ledger</span>
     <h1>Your road to financial independence</h1>
     <p class="lede">Nobody gets rich from an app. People get rich by keeping a wide gap between what they earn and what they spend, clearing expensive debt, and letting invested money compound for years. This ledger shows exactly how far away that is for you, and which lever moves it most.</p>
+    <p class="print-only fine" id="printedOn"></p>
   </header>
+
+  <aside class="privacy" aria-label="Privacy">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--note)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z" fill="none"/><path d="M9 12l2 2 4-4" fill="none"/></svg>
+    <div>
+      <p><b>Your financial information is never collected.</b> Everything you type into this calculator stays on your own device. There are no accounts, and none of your numbers are sent to any server.</p>
+      <p>Your numbers are saved only in this browser so they're here next time; "Reset to example" clears them. Emailing your results opens your own email app with a draft addressed to you. We never see it. How the site handles anonymous traffic stats and ads is explained in our <a href="privacy.html" style="color:var(--note)">Privacy Policy</a>.</p>
+    </div>
+  </aside>
+
+  <section class="panel no-print" aria-label="Save your results">
+    <h3>Keep a copy</h3>
+    <div class="actions">
+      <button type="button" class="btn btn-solid" id="printBtn">Print with my inputs</button>
+      <form class="email" id="emailForm" autocomplete="on">
+        <input type="email" id="emailTo" placeholder="Your email (optional)" autocomplete="email" aria-label="Your email address, optional">
+        <button type="submit" class="btn">Email results to myself</button>
+      </form>
+      <button type="button" class="btn" id="copyBtn">Copy summary</button>
+      <p class="status" id="status" role="status"></p>
+    </div>
+  </section>
 
   <div class="grid">
     <form class="panel" id="inputs" autocomplete="off">
@@ -203,7 +270,12 @@ th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercas
         <div class="table-wrap"><table id="debtTable"></table></div>
       </section>
 
-      <p class="fine">Educational projection, not financial advice. Returns are not guaranteed and real markets fall as well as rise. The model works monthly in inflation-adjusted dollars: surplus fills your emergency fund first, then pays expensive debt, then goes into investments.</p>
+      <section class="disclaimer fine" aria-label="Disclaimer">
+        <h3>Disclaimer</h3>
+        <p>Freedom Ledger is an educational calculator, not financial, investment, tax or legal advice, and it is not a recommendation to buy or sell any security. Projections assume a steady return every year; real markets rise and fall, and past performance does not guarantee future results. Results depend entirely on the numbers you enter and may be wrong for your situation. Talk to a qualified, fee-only financial professional before making decisions.</p>
+        <p>How the model works: it runs month by month in inflation-adjusted dollars. Each month's surplus fills your emergency fund first, then pays debts whose APR is above your expected return (highest first), then goes into investments.</p>
+        <p>Privacy: the numbers you enter are never collected, stored on a server, or shared. They are kept only in your browser's local storage on this device. See the <a href="privacy.html" style="color:var(--note)">Privacy Policy</a> for how the site uses cookies, analytics and ads. You can change your choice any time in <a href="#" data-cookie-settings style="color:var(--note)">Cookie settings</a>.</p>
+      </section>
     </div>
   </div>
 </div>
@@ -422,7 +494,72 @@ th { font: 500 10px var(--mono); letter-spacing: .06em; text-transform: uppercas
         <td>${d.balance <= 0 ? "Done" : d.paidAt == null ? "Not in 40 yrs" : yrs(d.paidAt)}</td></tr>`).join("") + `</tbody>`;
   }
 
+  // Plain-text summary used by email and copy.
+  function summary() {
+    const s = state, base = simulate(s);
+    const debtTotal = s.debts.reduce((a, d) => a + Math.max(0, d.balance), 0);
+    const steps = [...document.querySelectorAll("#steps li")].map(li =>
+      `${li.querySelector(".n").textContent}. ${li.querySelector(".t").textContent} [${li.querySelector(".pill").textContent}]`);
+    const debtRows = [...document.querySelectorAll("#debtTable tbody tr")].map(tr =>
+      "- " + [...tr.children].map(td => td.textContent.trim()).join(" | "));
+    return [
+      "FREEDOM LEDGER RESULTS (" + new Date().toLocaleDateString() + ")",
+      "",
+      "Free in: " + $("kFree").textContent + " (" + $("kFreeS").textContent + ")",
+      "Savings rate: " + $("kRate").textContent + " (" + $("kRateS").textContent + ")",
+      "Net worth: " + fmt(s.cash + s.invested - debtTotal),
+      "FI number: " + fmt(base.fiTarget),
+      "",
+      "MY INPUTS",
+      "Take-home income: " + fmt(s.income) + "/mo",
+      "Spending: " + fmt(s.expenses) + "/mo",
+      "Cash savings: " + fmt(s.cash),
+      "Invested: " + fmt(s.invested),
+      ...s.debts.map(d => `Debt - ${d.name}: ${fmt(d.balance)} at ${d.apr}% APR, ${fmt(d.min)}/mo min`),
+      `Assumptions: ${s.ret}% real return, ${s.swr}% withdrawal rate, ${s.efMonths}-month emergency fund`,
+      "",
+      "WHAT-IF",
+      $("verdict").textContent,
+      "",
+      "NEXT MOVES",
+      ...steps,
+      ...(debtRows.length ? ["", "DEBT PAYOFF ORDER (debt | balance | APR | strategy | paid off)", ...debtRows] : []),
+      "",
+      "Educational projection only, not financial advice.",
+    ].join("\n");
+  }
+  const say = t => { $("status").textContent = t; };
+
+  $("printBtn").addEventListener("click", () => {
+    $("printedOn").textContent = "Prepared " + new Date().toLocaleString();
+    window.print();
+  });
+  $("emailForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const to = $("emailTo").value.trim();
+    if (to && !$("emailTo").checkValidity()) { say("That email address doesn't look right. Check it, or leave it blank and pick the recipient in your email app."); return; }
+    const href = "mailto:" + encodeURIComponent(to) + "?subject=" + encodeURIComponent("My Freedom Ledger results") + "&body=" + encodeURIComponent(summary());
+    // Open the mail app by navigation, not a link click, so analytics click listeners never see this URL (it holds the user's numbers).
+    window.location.href = href;
+    say("Your email app should open with a draft. Nothing is sent until you press Send there. If no app opened, use Copy summary and paste it into an email.");
+  });
+  $("copyBtn").addEventListener("click", () => {
+    const text = summary();
+    const fallback = () => {
+      const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (err) {}
+      ta.remove(); say(ok ? "Summary copied. Paste it into an email to yourself." : "Copy was blocked by your browser. Try the Email button instead.");
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText)
+      navigator.clipboard.writeText(text).then(() => say("Summary copied. Paste it into an email to yourself."), fallback);
+    else fallback();
+  });
+  window.addEventListener("beforeprint", () => { $("printedOn").textContent = "Prepared " + new Date().toLocaleString(); });
+
   fillForm();
   update();
 })();
 </script>
+</body>
+</html>
