@@ -20,3 +20,15 @@ Both pages load Google Tag Manager (`GTM-5S8W6KMB`) and GA4 (`G-N48PR9J9NV`). `w
 ### Ads
 
 Both pages load Google AdSense (`ca-pub-5441763296362900`) after `consent.js`, so ad cookies follow the visitor's consent choice. `wealth/ads.txt` authorizes Google to sell ad space on the site and is served at `/ads.txt`.
+
+### Cost-of-living pages
+
+`scripts/build-cities.mjs` builds `/cost-of-living/` and one page per metro in `data/metros.json` (the 20 largest U.S. metro areas) from the U.S. Bureau of Economic Analysis Regional Price Parities, read through FRED. No API key is needed.
+
+```sh
+node scripts/build-cities.mjs            # fetch the latest data into data/rpp.json, then render
+node scripts/build-cities.mjs --offline  # re-render from the saved data/rpp.json
+```
+
+It also writes `wealth/sitemap.xml` and `wealth/robots.txt`. BEA publishes new metro figures once a year (usually December); re-run the script after each release and commit the result.
+

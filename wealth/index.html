@@ -642,6 +642,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   try { state = JSON.parse(localStorage.getItem(KEY)); } catch (e) { state = null; }
   let isExample = !state;
   if (!state) state = structuredClone(EXAMPLE);
+  // A cost-of-living page can pass ?expenses=N to show the example with that city's prices.
+  // Only the example is adjusted; a visitor's own saved numbers are never overwritten.
+  let cityExample = false;
+  try {
+    const q = new URLSearchParams(location.search), exp = Number(q.get("expenses"));
+    if (isExample && Number.isFinite(exp) && exp >= 500 && exp <= 50000) { state.expenses = Math.round(exp); cityExample = true; }
+  } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 
   const numFields = ["income", "expenses", "cash", "invested", "ret", "swr", "efMonths"];
@@ -650,6 +657,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $("match").checked = state.match; $("index").checked = state.index;
     renderDebtRows();
     $("sampleNote").hidden = !isExample;
+    if (cityExample) $("sampleNote").firstChild.textContent = "These are example figures, with spending adjusted for the city you picked. Type over them with yours. ";
   }
   const esc = t => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   function renderDebtRows() {
