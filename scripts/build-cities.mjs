@@ -8,7 +8,7 @@
  * Data: U.S. Bureau of Economic Analysis, Regional Price Parities by metropolitan area,
  * read through FRED (Federal Reserve Bank of St. Louis). No API key is needed.
  * Output: wealth/cost-of-living/index.html, wealth/cost-of-living/<slug>/index.html,
- * wealth/sitemap.xml and wealth/robots.txt.
+ * wealth/sitemap.xml, and the city list in wealth/llms.txt. robots.txt is static.
  */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -266,6 +266,19 @@ await writeFile(join(WEB, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?
 ${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${data.fetched}</lastmod></url>`).join("\n")}
 </urlset>
 `);
-await writeFile(join(WEB, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+// llms.txt: replace the block between the cities markers, keep everything else as written.
+const llmsPath = join(WEB, "llms.txt");
+const llms = await readFile(llmsPath, "utf8");
+const START = "<!-- cities:start -->", END = "<!-- cities:end -->";
+if (!llms.includes(START) || !llms.includes(END)) throw new Error("wealth/llms.txt is missing the cities markers");
+const cityList = `${START}
+## Cost of living by city
 
-console.log(`Wrote ${written} city pages, the hub page, sitemap.xml and robots.txt (data year ${year}).`);
+Official U.S. Bureau of Economic Analysis Regional Price Parities for ${year} (U.S. average = 100), and what the calculator's example household would need invested to retire in each metro area.
+
+- [Cost of living by city](${SITE}/cost-of-living/): All 20 largest U.S. metro areas compared, most expensive first.
+${ranked.map(r => `- [Cost of living in ${r.city}](${SITE}/cost-of-living/${r.slug}/): Prices ${diff(r.all)}; housing index ${r.housing.toFixed(1)}.`).join("\n")}
+${END}`;
+await writeFile(llmsPath, llms.slice(0, llms.indexOf(START)) + cityList + llms.slice(llms.indexOf(END) + END.length));
+
+console.log(`Wrote ${written} city pages, the hub page, sitemap.xml and the llms.txt city list (data year ${year}).`);
