@@ -15,7 +15,9 @@ The numbers you enter are never collected: there is no server-side storage, and 
 
 ### Analytics and cookie consent
 
-Both pages load Google Tag Manager (`GTM-5S8W6KMB`) and GA4 (`G-N48PR9J9NV`). `wealth/consent.js` must load before them: it sets Google Consent Mode v2 to *denied* by default for EEA/UK/Swiss visitors (by IP region, via the `region` parameter) and *granted* elsewhere, shows the cookie banner to visitors in a European time zone (Accept all / Reject all / Customize), saves the choice in localStorage, and pushes a `cookie_consent_update` event. Any element with `data-cookie-settings` reopens the banner.
+Both pages load Google Tag Manager (`GTM-5S8W6KMB`) and GA4 (`G-N48PR9J9NV`). `wealth/consent.js` must load before them and before AdSense. It sets Google Consent Mode v2 to *denied* for the EEA, UK and Switzerland (via the `region` parameter) and *granted* elsewhere.
+
+Visitors in the EEA, UK and Switzerland get their consent message from **Google's certified CMP** (AdSense → Privacy & messaging → European regulations), which the AdSense tag loads and which uses IAB TCF v2.2, as [Google requires](https://support.google.com/adsense/answer/13554116). `consent.js` never shows its own banner or grants consent there. Elsewhere, "Cookie settings" opens the site's own opt-out panel. Any element with `data-cookie-settings` opens whichever applies (Google's `showRevocationMessage()` where consent is required).
 
 ### Ads
 
