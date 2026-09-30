@@ -1,5 +1,5 @@
 # p1-jonathanng.net
-## Freedom Ledger (`wealth/`)
+## ChartMyFreedom calculator (`wealth/`)
 
 Deployed with Cloudflare Workers static assets: `wrangler.jsonc` serves `wealth/` at the site root.
 
