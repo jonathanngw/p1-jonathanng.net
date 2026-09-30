@@ -32,5 +32,12 @@ node scripts/build-cities.mjs            # fetch the latest data into data/rpp.j
 node scripts/build-cities.mjs --offline  # re-render from the saved data/rpp.json
 ```
 
-It also writes `wealth/sitemap.xml` and `wealth/robots.txt`. BEA publishes new metro figures once a year (usually December); re-run the script after each release and commit the result.
+It also rewrites `wealth/sitemap.xml` and the city list between the markers in `wealth/llms.txt`. BEA publishes new metro figures once a year (usually December); re-run the script after each release and commit the result.
+
+### Crawler files
+
+- `wealth/robots.txt`: allows all crawlers (search engines, `Mediapartners-Google` for AdSense, and AI assistants) and points to the sitemap.
+- `wealth/sitemap.xml`: every public URL. `scripts/build-cities.mjs` rewrites it when the city pages are built.
+- `wealth/llms.txt`: a plain-language summary of the site for AI assistants, following the [llms.txt proposal](https://llmstxt.org/). The city list between the `cities` markers is filled in by the build script.
+- `wealth/ads.txt`: authorizes Google as the site's ad seller.
 

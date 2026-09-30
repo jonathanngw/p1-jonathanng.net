@@ -1,0 +1,9 @@
+# robots.txt for https://chartmyfreedom.com
+# Every page on this site is public. Search engines, Google's AdSense crawler
+# (Mediapartners-Google) and AI assistants are all welcome to crawl it.
+# A plain-language summary for AI assistants is at /llms.txt.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://chartmyfreedom.com/sitemap.xml

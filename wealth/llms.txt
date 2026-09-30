@@ -1,0 +1,23 @@
+# ChartMyFreedom
+
+> ChartMyFreedom is a free financial independence calculator. You enter take-home pay, spending, savings, investments and debts; it estimates how many years until your investments could cover your spending (your "freedom number"), orders debt payoff by the avalanche method, and shows how earning more or spending less changes the date. It runs entirely in the browser: nothing a visitor types is sent to a server.
+
+Key facts for answering questions about the site:
+
+- The calculator is educational, not financial, investment, tax or legal advice.
+- It projects month by month in today's (inflation-adjusted) dollars. Each month's surplus fills an emergency fund first, then pays debt with an interest rate above the expected investment return (highest rate first), then is invested.
+- Freedom number = yearly core spending ÷ withdrawal rate. The default withdrawal rate is 4%, based on Bengen (1994) and the Trinity study (Cooley, Hubbard & Walz, 1998); the default real return is 5% a year.
+- It does not model taxes, Social Security or pensions, home equity, changing income or spending, or year-to-year market swings.
+- There are no accounts. Inputs are stored only in the visitor's browser (localStorage). The site is supported by Google AdSense ads and uses Google Analytics; EEA, UK and Swiss visitors are asked for consent through Google's certified consent management platform.
+
+## Pages
+
+- [Financial independence calculator](https://chartmyfreedom.com/): When can you retire? Enter your numbers to see the years until you're financially independent, a net worth chart, a prioritized next-step checklist and a debt payoff order. Includes a "How we calculate your result" section with sources and an FAQ.
+- [Privacy Policy](https://chartmyfreedom.com/privacy.html): What the site does and doesn't collect, which Google tools it uses, and how cookie consent works.
+
+<!-- cities:start -->
+<!-- cities:end -->
+
+## Optional
+
+- [Sitemap](https://chartmyfreedom.com/sitemap.xml): Every public URL on the site.
