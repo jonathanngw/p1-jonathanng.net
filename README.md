@@ -16,3 +16,7 @@ The numbers you enter are never collected: there is no server-side storage, and 
 ### Analytics and cookie consent
 
 Both pages load Google Tag Manager (`GTM-5S8W6KMB`) and GA4 (`G-N48PR9J9NV`). `wealth/consent.js` must load before them: it sets Google Consent Mode v2 to *denied* by default for EEA/UK/Swiss visitors (by IP region, via the `region` parameter) and *granted* elsewhere, shows the cookie banner to visitors in a European time zone (Accept all / Reject all / Customize), saves the choice in localStorage, and pushes a `cookie_consent_update` event. Any element with `data-cookie-settings` reopens the banner.
+
+### Ads
+
+Both pages load Google AdSense (`ca-pub-5441763296362900`) after `consent.js`, so ad cookies follow the visitor's consent choice. `wealth/ads.txt` authorizes Google to sell ad space on the site and is served at `/ads.txt`.
