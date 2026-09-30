@@ -68,15 +68,15 @@
 
   var CSS =
     ".cc{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:2147483000;max-width:640px;margin:0 auto;" +
-    "background:var(--sheet,#fff);color:var(--ink,#1b1b1b);border:1px solid var(--rule,#ccc);border-radius:8px;" +
-    "box-shadow:0 8px 30px rgba(0,0,0,.18);padding:18px 20px;font:14px/1.5 var(--body,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif);display:grid;gap:12px}" +
-    ".cc h2{all:unset;display:block;font-weight:600;font-size:15px}" +
+    "background:var(--sheet,#fff);color:var(--ink,#1b1b1b);border:1px solid var(--field,#7d8882);border-radius:8px;" +
+    "box-shadow:0 8px 30px rgba(0,0,0,.18);padding:18px 20px;font:1rem/1.5 var(--body,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif);display:grid;gap:12px}" +
+    ".cc h2{all:unset;display:block;font-weight:600;font-size:1.0625rem}" +
     ".cc p{margin:0}.cc a{color:var(--note,#0066cc)}" +
     ".cc-opts{display:grid;gap:8px;border-top:1px solid var(--rule,#ddd);padding-top:12px}" +
-    ".cc-opts label{display:flex;gap:10px;align-items:flex-start}.cc-opts input{margin-top:4px;accent-color:var(--note,#0066cc)}" +
-    ".cc-opts small{display:block;color:var(--muted,#555);font-size:12px}" +
+    ".cc-opts label{display:flex;gap:10px;align-items:flex-start}.cc-opts input{margin-top:4px;width:20px;height:20px;flex:none;accent-color:var(--note,#0066cc)}" +
+    ".cc-opts small{display:block;color:var(--muted,#555);font-size:.875rem}" +
     ".cc-btns{display:flex;flex-wrap:wrap;gap:8px}" +
-    ".cc button{font:500 13px inherit;font-family:inherit;padding:8px 14px;border-radius:4px;cursor:pointer;border:1px solid var(--note,#0066cc);background:transparent;color:var(--note,#0066cc)}" +
+    ".cc button{font:500 .9375rem inherit;font-family:inherit;min-height:44px;padding:10px 18px;border-radius:4px;cursor:pointer;border:1px solid var(--note,#0066cc);background:transparent;color:var(--note,#0066cc)}" +
     ".cc button.cc-primary{background:var(--note,#0066cc);color:var(--sheet,#fff)}" +
     ".cc button:focus-visible{outline:2px solid var(--note,#0066cc);outline-offset:2px}" +
     ".cc[hidden],.cc [hidden]{display:none!important}" +

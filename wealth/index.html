@@ -43,11 +43,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://chartmyfreedom.com/#org",
+      "name": "ChartMyFreedom",
+      "url": "https://chartmyfreedom.com/"
+    },
+    {
       "@type": "WebSite",
       "@id": "https://chartmyfreedom.com/#website",
       "url": "https://chartmyfreedom.com/",
       "name": "ChartMyFreedom",
-      "inLanguage": "en-US"
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://chartmyfreedom.com/#org"
+      }
     },
     {
       "@type": "WebPage",
@@ -55,9 +64,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "url": "https://chartmyfreedom.com/",
       "name": "When Can I Retire? Financial Independence Calculator",
       "description": "Enter your income, spending, savings and debts to see how many years until you can retire. Free calculator with a debt payoff plan. No sign-up, nothing stored.",
-      "isPartOf": { "@id": "https://chartmyfreedom.com/#website" },
-      "mainEntity": { "@id": "https://chartmyfreedom.com/#calculator" },
-      "inLanguage": "en-US"
+      "isPartOf": {
+        "@id": "https://chartmyfreedom.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://chartmyfreedom.com/#calculator"
+      },
+      "inLanguage": "en-US",
+      "dateModified": "2026-09-30",
+      "publisher": {
+        "@id": "https://chartmyfreedom.com/#org"
+      },
+      "citation": [
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Determining Withdrawal Rates Using Historical Data",
+          "author": {
+            "@type": "Person",
+            "name": "William P. Bengen"
+          },
+          "datePublished": "1994-10",
+          "isPartOf": {
+            "@type": "Periodical",
+            "name": "Journal of Financial Planning"
+          }
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Retirement Savings: Choosing a Withdrawal Rate That Is Sustainable",
+          "author": [
+            {
+              "@type": "Person",
+              "name": "Philip L. Cooley"
+            },
+            {
+              "@type": "Person",
+              "name": "Carl M. Hubbard"
+            },
+            {
+              "@type": "Person",
+              "name": "Daniel T. Walz"
+            }
+          ],
+          "datePublished": "1998-02",
+          "isPartOf": {
+            "@type": "Periodical",
+            "name": "AAII Journal"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "Compound Interest Calculator",
+          "url": "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator",
+          "publisher": {
+            "@type": "GovernmentOrganization",
+            "name": "U.S. Securities and Exchange Commission"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "An essential guide to building an emergency fund",
+          "url": "https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/",
+          "publisher": {
+            "@type": "GovernmentOrganization",
+            "name": "Consumer Financial Protection Bureau"
+          }
+        }
+      ]
     },
     {
       "@type": "WebApplication",
@@ -68,7 +141,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "operatingSystem": "Any",
       "browserRequirements": "Requires JavaScript",
       "isAccessibleForFree": true,
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "description": "Projects your net worth month by month in today's dollars to estimate how many years until you can retire, orders your debt payoff, and shows how earning more or spending less changes the date.",
       "featureList": [
         "Years-to-retirement estimate",
@@ -76,7 +153,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "Debt payoff order (avalanche method)",
         "Earn-more and spend-less what-if sliders",
         "Prioritized next-step checklist"
-      ]
+      ],
+      "publisher": {
+        "@id": "https://chartmyfreedom.com/#org"
+      }
     },
     {
       "@type": "FAQPage",
@@ -85,22 +165,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {
           "@type": "Question",
           "name": "How does this retirement calculator work?",
-          "acceptedAnswer": { "@type": "Answer", "text": "It projects your finances month by month in today's dollars. Each month, the money left after spending first builds your emergency fund, then pays off debt with an interest rate above your expected investment return, then gets invested. You can retire when your investments reach your freedom number." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It projects your finances month by month in today's dollars. Each month, the money left after spending first builds your emergency fund, then pays off debt with an interest rate above your expected investment return, then gets invested. You can retire when your investments reach your freedom number."
+          }
         },
         {
           "@type": "Question",
           "name": "What is a freedom number?",
-          "acceptedAnswer": { "@type": "Answer", "text": "It's the amount you need invested to cover your yearly spending from your investments alone. It equals your yearly spending divided by your withdrawal rate. At a 4% withdrawal rate, that is 25 times your yearly spending." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's the amount you need invested to cover your yearly spending from your investments alone. It equals your yearly spending divided by your withdrawal rate. At a 4% withdrawal rate, that is 25 times your yearly spending."
+          }
         },
         {
           "@type": "Question",
           "name": "What withdrawal rate should I use?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Many people start with 4%, based on historical studies of how long a stock and bond portfolio lasted over 30-year retirements. A lower rate, such as 3.5%, is more conservative and suits longer retirements." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Many people start with 4%, based on historical studies of how long a stock and bond portfolio lasted over 30-year retirements. A lower rate, such as 3.5%, is more conservative and suits longer retirements."
+          }
         },
         {
           "@type": "Question",
           "name": "Is my financial information stored or shared?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. Everything you type stays in your browser on this device. Nothing you enter is sent to a server, and emailing your results opens a draft in your own email app." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything you type stays in your browser on this device. Nothing you enter is sent to a server, and emailing your results opens a draft in your own email app."
+          }
         }
       ]
     }
@@ -120,86 +212,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --rule: #e1e6e2;
   --note: #10684a;         /* banknote green: the accent */
   --note-soft: #e6f1eb;
-  --brass: #a86f14;        /* the what-if line */
+  --brass: #8a5a0c;        /* the what-if line (5.5:1 on paper) */
   --good: #1d7a4b;
-  --warn: #b45f06;
+  --warn: #9a4f04;
   --bad: #b3372b;
   --display: "Newsreader", Georgia, "Times New Roman", serif;
   --body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --field: #7d8882;        /* form-field borders: 3:1 against paper and sheet */
   --radius: 10px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #0e1311; --sheet: #151c19; --ink: #e8eeea; --muted: #93a39a; --rule: #26302b;
     --note: #5cc497; --note-soft: #173127; --brass: #e3ad4f;
-    --good: #5cc497; --warn: #e3ad4f; --bad: #f07a6c; color-scheme: dark;
+    --good: #5cc497; --warn: #e3ad4f; --bad: #f07a6c; --field: #66756d; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #0e1311; --sheet: #151c19; --ink: #e8eeea; --muted: #93a39a; --rule: #26302b;
   --note: #5cc497; --note-soft: #173127; --brass: #e3ad4f;
-  --good: #5cc497; --warn: #e3ad4f; --bad: #f07a6c; color-scheme: dark;
+  --good: #5cc497; --warn: #e3ad4f; --bad: #f07a6c; --field: #66756d; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
-body { background: var(--paper); color: var(--ink); font: 15px/1.55 var(--body); margin: 0; padding-inline: 20px; padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+body { background: var(--paper); color: var(--ink); font: 1.0625rem/1.55 var(--body); margin: 0; padding-inline: 20px; padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
 a { color: var(--note); text-underline-offset: 3px; }
 button { font: inherit; cursor: pointer; }
 .page { max-width: 1160px; margin: 0 auto; }
 
 /* Top bar */
-.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; border-bottom: 1px solid var(--rule); }
-.brand { font: 500 19px/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; border-bottom: 1px solid var(--rule); }
+.brand { font: 500 1.3125rem/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
 .brand::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--note); margin-right: 10px; vertical-align: 2px; }
-.top nav { display: flex; gap: 20px; font-size: 14px; }
-.top nav a { color: var(--muted); text-decoration: none; }
+.top nav { display: flex; gap: 8px 16px; flex-wrap: wrap; font-size: 1rem; }
+.top nav a { color: var(--muted); text-decoration: none; padding: 10px 4px; }
 .top nav a:hover { color: var(--ink); }
-@media (max-width: 480px) { .top nav a[href="#result"], .top nav a[href="#faq"] { display: none; } .top nav { gap: 16px; } }
+@media (max-width: 480px) { .top nav a[href="#result"], .top nav a[href="#method"], .top nav a[href="#faq"] { display: none; } .top nav { gap: 16px; } }
 
 /* Intro */
 .intro { padding-block: 52px 32px; display: grid; gap: 14px; }
-.kicker { margin: 0; font-size: 14px; color: var(--muted); }
-h1 { font: 400 clamp(36px, 5.6vw, 64px)/1.04 var(--display); letter-spacing: -.02em; margin: 0; max-width: 19ch; text-wrap: balance; }
-.lede { margin: 0; font-size: 17px; color: var(--muted); max-width: 60ch; }
+.kicker { margin: 0; font-size: 1rem; color: var(--muted); }
+h1 { font: 400 clamp(2.5rem, 6vw, 4.25rem)/1.04 var(--display); letter-spacing: -.02em; margin: 0; max-width: 19ch; text-wrap: balance; }
+.lede { margin: 0; font-size: 1.1875rem; color: var(--muted); max-width: 60ch; }
 
 /* Numbered stages: 1 inputs, 2 result */
-.stepno { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 12px; border-radius: 50%; background: var(--ink); color: var(--paper); font: 500 14px/1 var(--mono); vertical-align: 4px; }
+.stepno { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 12px; border-radius: 50%; background: var(--ink); color: var(--paper); font: 500 1rem/1 var(--mono); vertical-align: 4px; }
 
 /* Result */
 .result { margin-top: 28px; background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius); padding: 28px 28px 24px; display: grid; gap: 12px; scroll-margin-top: 20px; }
-.result h2 { font-size: 22px; }
-.answer { margin: 8px 0 0; font: 400 clamp(34px, 5vw, 56px)/1.08 var(--display); letter-spacing: -.02em; text-wrap: balance; }
+.result h2 { font-size: 1.625rem; }
+.answer { margin: 8px 0 0; font: 400 clamp(2.375rem, 5.4vw, 3.75rem)/1.08 var(--display); letter-spacing: -.02em; text-wrap: balance; }
 .answer #kFree { font-style: italic; color: var(--note); white-space: nowrap; }
-.answer-sub { margin: 0; font-size: 17px; color: var(--muted); max-width: 60ch; }
+.answer-sub { margin: 0; font-size: 1.1875rem; color: var(--muted); max-width: 60ch; }
 .figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 22px 0 0; max-width: 760px; border-top: 1px solid var(--rule); }
 .figures > div { padding: 16px 20px 0 0; display: grid; gap: 2px; align-content: start; }
 .figures > div + div { padding-left: 20px; border-left: 1px solid var(--rule); }
-.figures dt { font-size: 13px; color: var(--muted); }
-.figures dd { margin: 0; font: 400 30px/1.15 var(--display); font-variant-numeric: tabular-nums lining-nums; }
-.figures dd.sub { font: 13px/1.4 var(--body); color: var(--muted); }
+.figures dt { font-size: 0.9375rem; color: var(--muted); }
+.figures dd { margin: 0; font: 400 2.125rem/1.15 var(--display); font-variant-numeric: tabular-nums lining-nums; }
+.figures dd.sub { font: 0.9375rem/1.4 var(--body); color: var(--muted); }
 @media (max-width: 600px) {
   .intro { padding-block: 32px 22px; }
   .result { padding: 22px 18px 18px; }
   .figures { grid-template-columns: minmax(0, 1fr); }
   .figures > div, .figures > div + div { padding: 12px 0; border-left: 0; border-bottom: 1px solid var(--rule); grid-template-columns: 1fr auto; align-items: baseline; column-gap: 12px; }
   .figures dd.sub { grid-column: 1 / -1; }
-  .figures dd { font-size: 24px; }
+  .figures dd { font-size: 1.75rem; }
 }
 
-.assure { margin: 0; display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
+.assure { margin: 0; display: flex; gap: 8px; align-items: center; font-size: 0.9375rem; color: var(--muted); }
 .assure svg { width: 15px; height: 15px; flex: none; stroke: var(--note); }
 
 /* Save actions */
 .save { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; padding-top: 18px; border-top: 1px solid var(--rule); }
-.btn { border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 500; line-height: 1.2; }
+.btn { min-height: 44px; display: inline-flex; align-items: center; border: 1px solid var(--field); background: var(--sheet); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: 0.9375rem; font-weight: 500; line-height: 1.2; }
 .btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 .btn.primary:hover { opacity: .88; }
 .email { display: flex; gap: 8px; flex: 1 1 100%; flex-wrap: wrap; }
 .email input { flex: 1 1 220px; min-width: 0; max-width: 340px; }
-.status { font-size: 13px; color: var(--muted); margin: 0; flex-basis: 100%; }
+.status { font-size: 0.9375rem; color: var(--muted); margin: 0; flex-basis: 100%; }
 .status:empty { display: none; }
 
 
@@ -207,95 +300,107 @@ h1 { font: 400 clamp(36px, 5.6vw, 64px)/1.04 var(--display); letter-spacing: -.0
 .sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius); padding: 22px 22px 18px; display: grid; gap: 22px; min-width: 0; }
 .sheet { padding: 28px; gap: 24px; }
 .sheet-head { display: grid; gap: 14px; }
-.sheet-head h2 { font-size: 22px; }
+.sheet-head h2 { font-size: 1.625rem; }
 .sheet-head .sample { margin: 0; }
 .sheet-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 56px; }
 .sheet-grid fieldset:nth-child(-n+2) { padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
 @media (max-width: 820px) { .sheet { padding: 22px 18px; } .sheet-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } .sheet-grid fieldset:nth-child(3) { padding-bottom: 24px; border-bottom: 1px solid var(--rule); } }
-.sheet-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+.sheet-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 0.9375rem; color: var(--muted); }
 .sheet-foot .btn { text-decoration: none; }
-.sample { font-size: 12.5px; color: var(--muted); margin: -12px 0 0; }
-.sample button { border: 0; background: none; color: var(--note); text-decoration: underline; text-underline-offset: 3px; padding: 0; font-size: inherit; }
+.sample { font-size: 0.9375rem; color: var(--muted); margin: -12px 0 0; }
+.sample button { min-height: 24px; border: 0; background: none; color: var(--note); text-decoration: underline; text-underline-offset: 3px; padding: 0; font-size: inherit; }
 fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }
-legend { padding: 0; margin-bottom: 12px; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
-.field { display: grid; grid-template-columns: minmax(0, 1fr) 132px; align-items: center; gap: 12px; }
-.field label { font-size: 14px; line-height: 1.3; }
-.field small { display: block; color: var(--muted); font-size: 12px; margin-top: 1px; }
+legend { padding: 0; margin-bottom: 12px; font-size: 0.875rem; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.field { display: grid; grid-template-columns: minmax(0, 1fr) 9.5rem; align-items: center; gap: 12px; }
+@media (max-width: 26em) { .field { grid-template-columns: minmax(0, 1fr); gap: 6px; } body { padding-inline: 16px; } .answer #kFree { white-space: normal; } .answer { overflow-wrap: anywhere; } .sheet, .result { padding-inline: 14px; } }
+.field label { font-size: 1rem; line-height: 1.3; }
+.field small { display: block; color: var(--muted); font-size: 0.875rem; margin-top: 1px; }
 .num { position: relative; display: block; min-width: 0; }
-.num[data-pre]::before, .num[data-post]::after { position: absolute; top: 50%; transform: translateY(-50%); color: var(--muted); font: 13px var(--mono); pointer-events: none; }
+.num[data-pre]::before, .num[data-post]::after { position: absolute; top: 50%; transform: translateY(-50%); color: var(--muted); font: 0.9375rem var(--mono); pointer-events: none; }
 .num[data-pre]::before { content: attr(data-pre); left: 10px; }
 .num[data-post]::after { content: attr(data-post); right: 10px; }
 input[type=number], input[type=text], input[type=email] {
-  width: 100%; font: 14px var(--mono); padding: 9px 10px; border: 1px solid var(--rule); border-radius: 7px;
+  width: 100%; font: 1rem var(--mono); padding: 9px 10px; border: 1px solid var(--field); border-radius: 7px;
   background: var(--paper); color: var(--ink); text-align: right; font-variant-numeric: tabular-nums;
   transition: border-color .15s, background .15s;
 }
 .num[data-pre] input { padding-left: 22px; }
 .num[data-post] input { padding-right: 30px; }
 input[type=text], input[type=email] { text-align: left; font-family: var(--body); }
-input:hover { border-color: color-mix(in srgb, var(--muted) 45%, var(--rule)); }
-input:focus { outline: none; border-color: var(--note); background: var(--sheet); }
+input:hover { border-color: var(--muted); }
+input:focus { outline: none; border-color: var(--note); background: var(--sheet); box-shadow: 0 0 0 3px color-mix(in srgb, var(--note) 30%, transparent); }
 input[type=number] { -moz-appearance: textfield; appearance: textfield; }
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 :focus-visible { outline: 2px solid var(--note); outline-offset: 2px; }
 input:focus-visible { outline: none; }
-.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.4; }
-.check input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--note); flex: none; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 1rem; line-height: 1.4; }
+.check input { margin: 3px 0 0; width: 20px; height: 20px; accent-color: var(--note); flex: none; }
 .sheet hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 
 /* Debts inside the sheet */
 .debt-cols, .debt-nums { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .8fr) minmax(0, .95fr); gap: 6px; }
-.debt-cols { font-size: 11.5px; color: var(--muted); margin-bottom: -4px; }
+.debt-cols { font-size: 0.875rem; color: var(--muted); margin-bottom: -4px; }
 .debt { display: grid; gap: 6px; padding-bottom: 12px; border-bottom: 1px dashed var(--rule); }
 .debt-name { display: flex; gap: 6px; align-items: center; }
-.debt-name input { border-color: transparent; background: transparent; padding-left: 0; font-weight: 500; font-size: 14px; }
+.debt-name input { border-color: transparent; border-bottom-color: var(--field); border-radius: 0; background: transparent; padding-left: 0; font-weight: 500; font-size: 1rem; }
 .debt-name input:hover { border-color: transparent; }
 .debt-name input:focus { padding-left: 8px; border-color: var(--note); background: var(--sheet); }
-.debt-nums input { font-size: 13px; padding-block: 7px; }
-.x { border: 0; background: transparent; color: var(--muted); font-size: 13px; padding: 4px 6px; border-radius: 6px; }
+.debt-nums input { font-size: 1rem; padding-block: 7px; }
+.x { min-height: 36px; min-width: 44px; border: 0; background: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; font-size: 0.9375rem; padding: 4px 6px; border-radius: 6px; }
 .x:hover { color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent); }
-.add { border: 1px dashed var(--rule); background: transparent; color: var(--note); padding: 9px; border-radius: 7px; font-size: 13px; font-weight: 500; }
+.add { min-height: 44px; border: 1px dashed var(--field); background: transparent; color: var(--note); padding: 9px; border-radius: 7px; font-size: 0.9375rem; font-weight: 500; }
 .add:hover { border-color: var(--note); }
 
 /* Results column */
 .results { display: grid; gap: 56px; min-width: 0; margin-top: 56px; }
-.sub-h { font: 500 15px var(--body); margin: 8px 0 -4px; }
+.sub-h { font: 500 1.0625rem var(--body); margin: 8px 0 -4px; }
+.method { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; border-top: 1px solid var(--rule); padding-top: 20px; }
+.method h3 { font: 500 1.125rem/1.35 var(--body); margin: 0 0 8px; }
+.method h3:not(:first-child) { margin-top: 24px; }
+.method p, .method li { font-size: 1rem; color: var(--muted); }
+.method ol, .method ul { margin: 0; padding-left: 1.25em; display: grid; gap: 8px; }
+.method p { margin: 12px 0 0; }
+.method cite { font-style: italic; }
+.meta-line { margin: 0; font-size: 0.9375rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 14px; }
+@media (max-width: 700px) { .method { grid-template-columns: minmax(0, 1fr); } }
 .faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; border-top: 1px solid var(--rule); padding-top: 20px; }
-.faq h3 { font: 500 16px/1.35 var(--body); margin: 0 0 6px; }
-.faq p { margin: 0; color: var(--muted); font-size: 14px; }
+.faq h3 { font: 500 1.125rem/1.35 var(--body); margin: 0 0 6px; }
+.faq p { margin: 0; color: var(--muted); font-size: 1rem; }
 @media (max-width: 700px) { .faq { grid-template-columns: minmax(0, 1fr); } }
 .results section { display: grid; gap: 18px; min-width: 0; }
 .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 20px; flex-wrap: wrap; }
-h2 { font: 400 26px/1.2 var(--display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
-.sec-note { margin: 4px 0 0; color: var(--muted); font-size: 14px; max-width: 62ch; }
+h2 { font: 400 1.875rem/1.2 var(--display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.sec-note { margin: 4px 0 0; color: var(--muted); font-size: 1rem; max-width: 62ch; }
 
 .chart-wrap { width: 100%; overflow-x: auto; }
-svg text { fill: var(--muted); font: 11px var(--mono); }
-.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+#chart { overflow: hidden; }
+svg text { fill: var(--muted); font: 13px var(--mono); } /* SVG user units; the chart scales as a whole and has a text alternative */
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.9375rem; color: var(--muted); }
 .legend span::before { content: ""; display: inline-block; width: 16px; height: 2px; margin-right: 7px; vertical-align: middle; background: var(--c); border-radius: 2px; }
+.legend span.dash2::before { background: repeating-linear-gradient(90deg, var(--c) 0 7px, transparent 7px 10px); height: 3px; }
 .legend span.dash::before { background: repeating-linear-gradient(90deg, var(--c) 0 4px, transparent 4px 7px); }
 
 .levers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 40px; padding-top: 6px; }
 @media (max-width: 600px) { .levers { grid-template-columns: minmax(0, 1fr); } }
 .lever { display: grid; gap: 10px; }
-.lever label { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; }
-.lever output { font: 500 15px var(--mono); color: var(--brass); font-variant-numeric: tabular-nums; }
-input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; margin: 0; }
-input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--brass) var(--fill, 0%), var(--rule) var(--fill, 0%)); }
-input[type=range]::-moz-range-track { height: 4px; border-radius: 4px; background: var(--rule); }
+.lever label { display: flex; justify-content: space-between; align-items: baseline; font-size: 1rem; }
+.lever output { font: 500 1.0625rem var(--mono); color: var(--brass); font-variant-numeric: tabular-nums; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 32px; background: transparent; margin: 0; }
+input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--brass) var(--fill, 0%), var(--field) var(--fill, 0%)); }
+input[type=range]::-moz-range-track { height: 4px; border-radius: 4px; background: var(--field); }
 input[type=range]::-moz-range-progress { height: 4px; border-radius: 4px; background: var(--brass); }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--brass); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
-input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--brass); }
-.verdict { border-left: 2px solid var(--brass); padding: 2px 0 2px 16px; font-size: 15px; max-width: 64ch; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; margin-top: -10px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--brass); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--brass); }
+.verdict { border-left: 2px solid var(--brass); padding: 2px 0 2px 16px; font-size: 1.0625rem; max-width: 64ch; }
 .verdict b { font-weight: 600; font-variant-numeric: tabular-nums; }
 
 /* Next moves */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
-.steps li { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 14px; padding: 14px 10px; border-bottom: 1px solid var(--rule); align-items: start; }
-.steps .mark { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 500 11px var(--mono); border: 1.5px solid var(--rule); color: var(--muted); margin-top: 1px; }
+.steps li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 14px; padding: 14px 10px; border-bottom: 1px solid var(--rule); align-items: start; }
+.steps .mark { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 500 0.8125rem var(--mono); border: 1.5px solid var(--field); color: var(--muted); margin-top: 1px; }
 .steps .t { font-weight: 500; }
-.steps .d { color: var(--muted); font-size: 14px; margin-top: 2px; }
-.steps .tag { font-size: 12px; font-weight: 600; color: var(--warn); white-space: nowrap; padding-top: 2px; }
+.steps .d { color: var(--muted); font-size: 1rem; margin-top: 2px; }
+.steps .tag { font-size: 0.875rem; font-weight: 600; color: var(--warn); white-space: nowrap; padding-top: 2px; }
 .steps li.done .mark { background: var(--note); border-color: var(--note); color: var(--sheet); }
 .steps li.done .t { color: var(--muted); }
 .steps li.now { background: color-mix(in srgb, var(--warn) 7%, transparent); border-radius: 8px; border-bottom-color: transparent; }
@@ -304,19 +409,24 @@ input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 
 
 /* Debt table */
 .table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+table { width: 100%; border-collapse: collapse; font-size: 1rem; font-variant-numeric: tabular-nums; }
 th, td { text-align: right; padding: 11px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
 th:first-child, td:first-child { text-align: left; padding-left: 0; }
 th:last-child, td:last-child { padding-right: 0; }
-th { font-size: 12px; font-weight: 500; color: var(--muted); border-bottom-color: var(--ink); }
+th { font-size: 0.875rem; font-weight: 500; color: var(--muted); border-bottom-color: var(--ink); }
+tbody th { font-size: inherit; font-weight: 500; color: var(--ink); border-bottom-color: var(--rule); }
 td.attack { color: var(--note); font-weight: 500; }
 
 /* Footer */
-.foot { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; font-size: 13px; color: var(--muted); }
-.foot-h { font: 600 13px var(--body); color: var(--ink); margin: 0 0 6px; letter-spacing: 0; }
+.foot { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; font-size: 0.9375rem; color: var(--muted); }
+.foot-h { font: 600 0.9375rem var(--body); color: var(--ink); margin: 0 0 6px; letter-spacing: 0; }
 .foot p { margin: 0; }
 @media (max-width: 760px) { .foot { grid-template-columns: minmax(0, 1fr); } }
 .print-only { display: none; }
+.skip { position: absolute; left: 16px; top: -100px; z-index: 10; background: var(--ink); color: var(--paper); padding: 12px 16px; border-radius: 8px; font-weight: 600; }
+.skip:focus { top: 12px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 @media (prefers-reduced-motion: no-preference) { .line { transition: d .3s; } }
@@ -324,18 +434,18 @@ td.attack { color: var(--note); font-weight: 500; }
 @media print {
   :root, :root[data-theme="dark"] {
     --paper: #fff; --sheet: #fff; --ink: #111; --muted: #444; --rule: #c9c9c9;
-    --note: #10684a; --note-soft: #eef4f0; --brass: #a86f14; --good: #1d7a4b; --warn: #8a4a00; --bad: #b3372b; color-scheme: light;
+    --note: #10684a; --note-soft: #eef4f0; --brass: #8a5a0c; --good: #1d7a4b; --warn: #8a4a00; --field: #7d8882; --bad: #b3372b; color-scheme: light;
   }
   @page { margin: 14mm; }
-  body { padding: 0; font-size: 12px; }
+  body { padding: 0; font-size: 0.875rem; }
   .top nav, .no-print, .x, .add, #sampleNote { display: none !important; }
   .print-only { display: block; }
   .intro { padding-block: 12px; gap: 6px; }
   .intro .lede, .intro .assure { display: none; }
-  h1 { font-size: 30px; max-width: none; }
+  h1 { font-size: 2.125rem; max-width: none; }
   .sheet, .result { padding: 14px; }
   .result { margin-top: 18px; break-inside: avoid; }
-  .answer { font-size: 32px; }
+  .answer { font-size: 2rem; }
   .results { gap: 28px; }
   .figures, .steps li, tr, .chart-wrap, .foot { break-inside: avoid; }
   h2, legend { break-after: avoid; }
@@ -350,13 +460,14 @@ td.attack { color: var(--note); font-weight: 500; }
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+<a class="skip" href="#inputs">Skip to the calculator</a>
 <div class="page">
   <header class="top">
     <a class="brand" href="./">ChartMyFreedom</a>
-    <nav aria-label="Site"><a href="#result">Your result</a><a href="#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="#" data-cookie-settings>Cookies</a></nav>
+    <nav aria-label="Site"><a href="#result">Your result</a><a href="#method">Method</a><a href="#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="#" data-cookie-settings>Cookies</a></nav>
   </header>
 
-  <main>
+  <main id="main">
     <section class="intro" aria-labelledby="page-title">
       <p class="kicker">Financial independence calculator</p>
       <h1 id="page-title">When can you retire?</h1>
@@ -424,7 +535,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <section aria-labelledby="h-chart">
         <div class="sec-head">
           <h2 id="h-chart">Net worth over time</h2>
-          <div class="legend"><span style="--c:var(--note)">Current plan</span><span style="--c:var(--brass)">With the changes below</span><span class="dash" style="--c:var(--muted)">Freedom number</span></div>
+          <div class="legend"><span style="--c:var(--note)">Current plan</span><span class="dash2" style="--c:var(--brass)">With the changes below (dashed)</span><span class="dash" style="--c:var(--muted)">Freedom number</span></div>
         </div>
         <div class="chart-wrap"><svg id="chart" viewBox="0 0 720 300" width="100%" style="display:block" role="img" aria-label="Projected net worth over time, in today's dollars"></svg></div>
         <h3 class="sub-h">What if you earned more or spent less?</h3>
@@ -442,7 +553,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <section aria-labelledby="h-debt">
         <div><h2 id="h-debt">Debt payoff order</h2><p class="sec-note">Pay minimums on everything, then put every spare dollar toward the highest rate that beats your expected return. Cheaper debt just gets its minimum.</p></div>
-        <div class="table-wrap"><table id="debtTable"></table></div>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Debt payoff table, scrollable"><table id="debtTable"></table></div>
+      </section>
+
+      <section id="method" aria-labelledby="h-method">
+        <div><h2 id="h-method">How we calculate your result</h2><p class="sec-note">The calculator runs a month-by-month projection in today's dollars, entirely in your browser. Here is exactly what it does, what it leaves out, and where the key assumptions come from.</p></div>
+        <div class="method">
+          <div>
+            <h3>Each month, in this order</h3>
+            <ol class="method-steps">
+              <li>Your investments grow at your expected return, converted to a monthly rate. The return is after inflation, so every figure is in today's dollars.</li>
+              <li>Interest is added to each debt and the minimum payments are made.</li>
+              <li>Money left after spending first fills your emergency fund, up to the number of months of core spending you chose. Core spending is your spending minus debt minimums.</li>
+              <li>Next, extra payments go to any debt with an interest rate above your expected return, highest rate first. This is known as the avalanche method.</li>
+              <li>Everything left over is invested.</li>
+            </ol>
+            <p>You reach independence when your investments equal your freedom number, which is your yearly core spending divided by your withdrawal rate, and no debt above your expected return remains.</p>
+          </div>
+          <div>
+            <h3>What the model leaves out</h3>
+            <ul>
+              <li>Taxes on investment growth and on withdrawals.</li>
+              <li>Social Security, pensions and other retirement income, which would lower the amount you need.</li>
+              <li>Home equity and other assets you don't invest.</li>
+              <li>Changes in your income or spending over time.</li>
+              <li>Market swings. It assumes the same return every year; a bad run of years early in retirement can matter more than the average.</li>
+            </ul>
+            <h3>Sources</h3>
+            <ol class="sources">
+              <li>William P. Bengen, "<a href="https://www.financialplanningassociation.org/sites/default/files/2021-04/MAR04%20Determining%20Withdrawal%20Rates%20Using%20Historical%20Data.pdf" rel="noopener">Determining Withdrawal Rates Using Historical Data</a>," <cite>Journal of Financial Planning</cite>, October 1994. The origin of the 4% withdrawal rate.</li>
+              <li>Philip L. Cooley, Carl M. Hubbard and Daniel T. Walz, "<a href="https://www.aaii.com/journal/199802/feature.pdf" rel="noopener">Retirement Savings: Choosing a Withdrawal Rate That Is Sustainable</a>," <cite>AAII Journal</cite>, February 1998 (the "Trinity study").</li>
+              <li>U.S. Securities and Exchange Commission, <a href="https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator" rel="noopener">Compound Interest Calculator</a>, Investor.gov.</li>
+              <li>Consumer Financial Protection Bureau, <a href="https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/" rel="noopener">An essential guide to building an emergency fund</a>.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="meta-line">Last updated <time datetime="2026-09-30">September 30, 2026</time>. ChartMyFreedom is free and supported by Google ads. Ads never change the results, which are calculated in your browser using the method above.</p>
       </section>
 
       <section id="faq" aria-labelledby="h-faq">
@@ -496,6 +642,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   try { state = JSON.parse(localStorage.getItem(KEY)); } catch (e) { state = null; }
   let isExample = !state;
   if (!state) state = structuredClone(EXAMPLE);
+  // A cost-of-living page can pass ?expenses=N to show the example with that city's prices.
+  // Only the example is adjusted; a visitor's own saved numbers are never overwritten.
+  let cityExample = false;
+  try {
+    const q = new URLSearchParams(location.search), exp = Number(q.get("expenses"));
+    if (isExample && Number.isFinite(exp) && exp >= 500 && exp <= 50000) { state.expenses = Math.round(exp); cityExample = true; }
+  } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 
   const numFields = ["income", "expenses", "cash", "invested", "ret", "swr", "efMonths"];
@@ -504,18 +657,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $("match").checked = state.match; $("index").checked = state.index;
     renderDebtRows();
     $("sampleNote").hidden = !isExample;
+    if (cityExample) $("sampleNote").firstChild.textContent = "These are example figures, with spending adjusted for the city you picked. Type over them with yours. ";
   }
+  const esc = t => String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   function renderDebtRows() {
     $("debts").innerHTML = state.debts.map((d, i) => `
       <div class="debt">
         <div class="debt-name">
           <input type="text" id="dn${i}" data-i="${i}" data-k="name" value="${d.name.replace(/"/g, "&quot;")}" aria-label="Debt name">
-          <button type="button" class="x" data-del="${i}" aria-label="Remove ${d.name.replace(/"/g, "&quot;")}">Remove</button>
+          <button type="button" class="x" data-del="${i}" aria-label="Remove ${esc(d.name)}">Remove</button>
         </div>
         <div class="debt-nums">
-          <span class="num" data-pre="$"><input type="number" id="db${i}" data-i="${i}" data-k="balance" value="${d.balance}" min="0" step="100" aria-label="Balance"></span>
-          <span class="num" data-post="%"><input type="number" id="da${i}" data-i="${i}" data-k="apr" value="${d.apr}" min="0" step="0.1" aria-label="APR"></span>
-          <span class="num" data-pre="$"><input type="number" id="dm${i}" data-i="${i}" data-k="min" value="${d.min}" min="0" step="10" aria-label="Minimum payment per month"></span>
+          <span class="num" data-pre="$"><input type="number" id="db${i}" data-i="${i}" data-k="balance" value="${d.balance}" min="0" step="100" aria-label="${esc(d.name)} balance in dollars"></span>
+          <span class="num" data-post="%"><input type="number" id="da${i}" data-i="${i}" data-k="apr" value="${d.apr}" min="0" step="0.1" aria-label="${esc(d.name)} interest rate, APR percent"></span>
+          <span class="num" data-pre="$"><input type="number" id="dm${i}" data-i="${i}" data-k="min" value="${d.min}" min="0" step="10" aria-label="${esc(d.name)} minimum payment per month in dollars"></span>
         </div>
       </div>`).join("");
   }
@@ -595,7 +750,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function drawChart(base, alt) {
     const svg = $("chart");
-    const W = Math.max(320, Math.round(svg.parentNode.clientWidth || 720)), H = W < 520 ? 240 : 300, L = 52, R = 12, T = 22, B = 28;
+    const W = Math.max(280, Math.round(svg.parentNode.clientWidth || 720)), H = W < 520 ? 240 : 300, L = 52, R = 12, T = 22, B = 28;
     svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
     const endM = Math.min(480, Math.max(120, Math.ceil(((base.fiMonth ?? 480) + 60) / 12) * 12));
     const a = base.series.slice(0, endM + 1), b = alt.series.slice(0, endM + 1);
@@ -617,7 +772,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     g += `<path d="${path(a)} L${x(a.length - 1)} ${y(Math.max(yMin, 0))} L${x(0)} ${y(Math.max(yMin, 0))}Z" fill="var(--note-soft)" opacity=".7"/>`;
     g += `<line x1="${L}" x2="${W - R}" y1="${y(base.fiTarget)}" y2="${y(base.fiTarget)}" stroke="var(--muted)" stroke-dasharray="4 4" stroke-width="1.2"/>`;
     g += `<text x="${L + 6}" y="${y(base.fiTarget) - 7}">Freedom number ${short(base.fiTarget)}</text>`;
-    g += `<path class="line" d="${path(b)}" fill="none" stroke="var(--brass)" stroke-width="2" stroke-linecap="round"/>`;
+    g += `<path class="line" d="${path(b)}" fill="none" stroke="var(--brass)" stroke-width="2.5" stroke-dasharray="7 4"/>`;
     g += `<path class="line" d="${path(a)}" fill="none" stroke="var(--note)" stroke-width="2.5" stroke-linecap="round"/>`;
     for (const [s, c] of [[alt, "var(--brass)"], [base, "var(--note)"]])
       if (s.fiMonth != null && s.fiMonth <= endM)
@@ -634,8 +789,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const base = simulate(s);
     const addI = +$("lvIncome").value, cut = +$("lvCut").value;
     $("oIncome").textContent = "+" + fmt(addI); $("oCut").textContent = "−" + fmt(cut);
+    $("lvIncome").setAttribute("aria-valuetext", fmt(addI) + " more per month");
+    $("lvCut").setAttribute("aria-valuetext", fmt(cut) + " less per month");
     const alt = simulate(s, addI, cut);
     drawChart(base, alt);
+    $("chart").setAttribute("aria-label", `Chart of projected net worth in today's dollars. Your freedom number is ${fmt(base.fiTarget)}. ` +
+      (base.fiMonth == null ? "On your current plan you don't reach it within 40 years. " : `On your current plan you reach it in ${longYrs(base.fiMonth)}. `) +
+      (alt.fiMonth == null ? "With the changes below you still don't reach it within 40 years." : `With the changes below you reach it in ${longYrs(alt.fiMonth)}.`));
 
     const surplus = s.income - s.expenses;
     const rate = s.income > 0 ? surplus / s.income : 0;
@@ -694,8 +854,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (!s.debts.length) { $("debtTable").innerHTML = `<tr><td>No debts entered. Everything spare goes straight to investing.</td></tr>`; return; }
     const rows = base.debts.map((d, i) => ({ ...s.debts[i], paidAt: d.paidAt }))
       .sort((a, b) => b.apr - a.apr);
-    $("debtTable").innerHTML = `<thead><tr><th>Debt</th><th>Balance</th><th>APR</th><th>Plan</th><th>Paid off</th></tr></thead><tbody>` +
-      rows.map(d => `<tr><td>${d.name.replace(/</g, "&lt;")}</td><td>${fmt(d.balance)}</td><td>${d.apr}%</td>
+    $("debtTable").innerHTML = `<caption class="sr-only">Debts in payoff order, highest interest rate first</caption><thead><tr><th scope="col">Debt</th><th scope="col">Balance</th><th scope="col">APR</th><th scope="col">Plan</th><th scope="col">Paid off</th></tr></thead><tbody>` +
+      rows.map(d => `<tr><th scope="row">${esc(d.name)}</th><td>${fmt(d.balance)}</td><td>${d.apr}%</td>
         <td class="${d.balance > 0 && d.apr > s.ret ? "attack" : ""}">${d.balance <= 0 ? "—" : d.apr > s.ret ? "Pay down first" : "Minimums only"}</td>
         <td>${d.balance <= 0 ? "Done" : d.paidAt == null ? "Not in 40 yrs" : yrs(d.paidAt)}</td></tr>`).join("") + `</tbody>`;
   }
